@@ -42,7 +42,7 @@ setup-development-tools: ## Install tools to build and maintain our products
 
 setup-flutter: ## Install flutter
 	cd $$HOME/Development; \
-	  make -C FLUTTER_DIR git clone https://github.com/flutter/flutter.git -b stable; \
+	  git clone https://github.com/flutter/flutter.git -b stable; \
 	  flutter precache; \
 	  flutter config --no-analytics; \
 	  flutter upgrade; \
