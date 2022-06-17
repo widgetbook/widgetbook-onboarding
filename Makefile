@@ -6,10 +6,10 @@ help: ## show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 setup-all: ## Install everything necessary to start working
-	make setup-brew
-	make setup-development-tools
-	make setup-communication
-	make setup-dock
+	$(MAKE) setup-brew
+	$(MAKE) setup-development-tools
+	$(MAKE) setup-communication
+	$(MAKE) setup-dock -i
 
 setup-brew: ## Install brew
 	# install homebrew
@@ -30,6 +30,7 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install stripe
 	brew install python
 
+	brew install --cask flutter
 	brew install --cask docker
 	brew install --cask fig
 	brew install --cask figma
@@ -38,6 +39,15 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install --cask ngrok
 	brew install --cask postman
 	brew install --cask visual-studio-code
+
+setup-flutter:
+	cd $$HOME/Development; \
+	  make -C FLUTTER_DIR git clone https://github.com/flutter/flutter.git -b stable; \
+	  flutter precache; \
+	  flutter config --no-analytics; \
+	  flutter upgrade; \
+	  echo 'export PATH="$$PATH:/Users/jenshorstmann/Development/flutter/bin"' >> ${HOME}/.zshrc; \
+	  echo 'export PATH="$$PATH:/Users/jenshorstmann/Development/flutter/bin/cache/dart-sdk/bin"' >> ${HOME}/.zshrc;
 
 setup-communication: ## Install tools to communicate with other team members
 	brew install --cask discord
