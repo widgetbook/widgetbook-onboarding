@@ -14,6 +14,7 @@ brew install node
 brew install node@16
 brew install openjdk
 brew install stripe
+brew install python
 
 brew install --cask docker
 brew install --cask fig
@@ -30,17 +31,22 @@ brew install --cask notion
 brew install --cask slack
 
 # MacOS dock
-brew install dockutil
-dockutil --remove "Launchpad"
-dockutil --remove "Safari"
-dockutil --remove "Messages"
-dockutil --remove "Maps"
-dockutil --remove "Photos"
-dockutil --remove "Contact"
-dockutil --remove "Reminders"
-dockutil --remove "Notes"
-dockutil --remove "TV"
-dockutil --remove "Music"
-dockutil --remove "Podcasts"
-dockutil --remove "App Store"
-dockutil --remove "System Preferences"
+brew tap lotyp/homebrew-formulae
+brew install lotyp/formulae/dockutil
+dockutil --remove "Launchpad" --no-restart
+dockutil --remove "Safari" --no-restart
+dockutil --remove "Messages" --no-restart
+dockutil --remove "Maps" --no-restart
+dockutil --remove "Photos" --no-restart
+dockutil --remove "Contact" --no-restart
+dockutil --remove "Reminders" --no-restart
+dockutil --remove "Notes" --no-restart
+dockutil --remove "TV" --no-restart
+dockutil --remove "Music" --no-restart
+dockutil --remove "Podcasts" --no-restart
+dockutil --remove "App Store" --no-restart
+dockutil --remove "System Preferences" --no-restart
+
+dockutil --add /Application/Google Chrome.app
+
+brew uninstall lotyp/formulae/dockutil
