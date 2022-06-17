@@ -31,6 +31,7 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install node
 	brew install node@16
 	brew install openjdk
+	echo 'export PATH="$$PATH:/opt/homebrew/opt/openjdk/bin"' >> ${HOME}/.zshrc; \
 	brew install stripe/stripe-cli/stripe
 	brew install python
 
