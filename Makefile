@@ -6,18 +6,18 @@ help: ## show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 setup-all: ## Install everything necessary to start working
-	setup-brew
-	setup-development-tools
-	setup-communication
-	setup-dock
+	make setup-brew
+	make setup-development-tools
+	make setup-communication
+	make setup-dock
 
 setup-brew: ## Install brew
 	# install homebrew
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 	# add homebrew to path
-	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile 
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+	echo 'eval "$$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.zprofile 
+	eval "$$(/opt/homebrew/bin/brew shellenv)"
 
 setup-development-tools: ## Install tools to build and maintain our products
 	brew install git
@@ -44,7 +44,7 @@ setup-communication: ## Install tools to communicate with other team members
 	brew install --cask notion
 	brew install --cask slack
 
-setup-dock:
+setup-dock: ## Configure MacOS dock
 	# Temporarily use this because v2.0 does not work
 	# and there is no formulae for version v3.0
 	brew tap lotyp/homebrew-formulae
