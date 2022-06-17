@@ -8,6 +8,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # development
 brew install git
+brew install gh
 brew install cocoapods
 brew install lcov
 brew install node
