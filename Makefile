@@ -3,11 +3,11 @@
 .DEFAULT_GOAL := help
 
 help: ## show this help
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-sdfZ_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 setup-all: ## Install everything necessary to start working
 	$(MAKE) setup-brew
-	$(MAKE) setup-development-tools
+	$(MAKE) setup-development
 	$(MAKE) setup-communication
 	$(MAKE) setup-dock -i
 
@@ -19,6 +19,10 @@ setup-brew: ## Install brew
 	echo 'eval "$$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.zprofile 
 	eval "$$(/opt/homebrew/bin/brew shellenv)"
 
+setup-development: ## Installs dev-tools and flutter
+	$(MAKE) setup-development-tools
+	$(MAKE) setup-flutter
+
 setup-development-tools: ## Install tools to build and maintain our products
 	brew install git
 	brew install gh
@@ -27,10 +31,9 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install node
 	brew install node@16
 	brew install openjdk
-	brew install stripe
+	brew install stripe/stripe-cli/stripe
 	brew install python
 
-	brew install --cask flutter
 	brew install --cask docker
 	brew install --cask fig
 	brew install --cask figma
@@ -40,17 +43,17 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install --cask postman
 	brew install --cask visual-studio-code
 
+FLUTTER_DIR = ${HOME}/Development
+FLUTTER = $(FLUTTER_DIR)/flutter/bin/flutter
 setup-flutter: ## Install flutter
-	FLUTTER_DIR=${HOME}/Development
-	FLUTTER=$(FLUTTER_DIR)/flutter/bin/flutter
 	mkdir $(FLUTTER_DIR)
-	cd FLUTTER_DIR; \
+	cd $(FLUTTER_DIR); \
 	  git clone https://github.com/flutter/flutter.git -b stable; \
 	  $(FLUTTER) precache; \
 	  $(FLUTTER) config --no-analytics; \
 	  $(FLUTTER) upgrade; \
-	  echo 'export PATH="$(FLUTTER_DIR)/flutter/bin"' >> ${HOME}/.zshrc; \
-	  echo 'export PATH="$(FLUTTER_DIR)/flutter/bin/cache/dart-sdk/bin"' >> ${HOME}/.zshrc;
+	  echo 'export PATH="$$PATH:$(FLUTTER_DIR)/flutter/bin"' >> ${HOME}/.zshrc; \
+	  echo 'export PATH="$$PATH:$(FLUTTER_DIR)/flutter/bin/cache/dart-sdk/bin"' >> ${HOME}/.zshrc;
 
 setup-communication: ## Install tools to communicate with other team members
 	brew install --cask discord
