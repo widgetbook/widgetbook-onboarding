@@ -41,13 +41,16 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install --cask visual-studio-code
 
 setup-flutter: ## Install flutter
-	cd $$HOME/Development; \
+	FLUTTER_DIR=${HOME}/Development
+	FLUTTER=$(FLUTTER_DIR)/flutter/bin/flutter
+	mkdir $(FLUTTER_DIR)
+	cd FLUTTER_DIR; \
 	  git clone https://github.com/flutter/flutter.git -b stable; \
-	  flutter precache; \
-	  flutter config --no-analytics; \
-	  flutter upgrade; \
-	  echo 'export PATH="$$PATH:/Users/jenshorstmann/Development/flutter/bin"' >> ${HOME}/.zshrc; \
-	  echo 'export PATH="$$PATH:/Users/jenshorstmann/Development/flutter/bin/cache/dart-sdk/bin"' >> ${HOME}/.zshrc;
+	  $(FLUTTER) precache; \
+	  $(FLUTTER) config --no-analytics; \
+	  $(FLUTTER) upgrade; \
+	  echo 'export PATH="$(FLUTTER_DIR)/flutter/bin"' >> ${HOME}/.zshrc; \
+	  echo 'export PATH="$(FLUTTER_DIR)/flutter/bin/cache/dart-sdk/bin"' >> ${HOME}/.zshrc;
 
 setup-communication: ## Install tools to communicate with other team members
 	brew install --cask discord
