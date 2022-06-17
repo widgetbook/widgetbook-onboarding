@@ -53,6 +53,10 @@ setup-dock: ## Configure MacOS dock
 	echo Remove default icons from dock
 	dockutil --remove "Launchpad" --no-restart
 	dockutil --remove "Safari" --no-restart
+	dockutil --remove "Mail" --no-restart
+	dockutil --remove "FaceTime" --no-restart
+	dockutil --remove "Calendar" --no-restart
+	dockutil --remove "Contacts" --no-restart
 	dockutil --remove "Messages" --no-restart
 	dockutil --remove "Maps" --no-restart
 	dockutil --remove "Photos" --no-restart
@@ -66,6 +70,18 @@ setup-dock: ## Configure MacOS dock
 	dockutil --remove "System Preferences" --no-restart
 
 	echo Add development tools to dock
-	dockutil --add /Application/Google Chrome.app
+	dockutil -a /Applications/Google Chrome.app --no-restart
+	dockutil -a /Applications/Utilities/Activity Monitor.app --no-restart
+	dockutil -a /Applications/Utilities/Terminal.app --no-restart
+	dockutil -a /Applications/Calendar.app --no-restart
+	dockutil -a /Applications/Mail.app --no-restart
+	dockutil -a /Applications/Discord.app --no-restart
+	dockutil -a /Applications/Slack.app --no-restart
+	dockutil -a /Applications/Notion.app --no-restart
+	dockutil -a /Applications/Postman.app --no-restart
+	dockutil -a /Applications/Visual Studio Code.app --no-restart
+	dockutil -a /Applications/XCode.app --no-restart
+	dockutil -a /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --no-restart
+	dockutil -a /Applications/Figma.app --no-restart
 
 	brew uninstall lotyp/formulae/dockutil
