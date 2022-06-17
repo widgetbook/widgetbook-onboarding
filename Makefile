@@ -40,7 +40,7 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install --cask postman
 	brew install --cask visual-studio-code
 
-setup-flutter:
+setup-flutter: ## Install flutter
 	cd $$HOME/Development; \
 	  make -C FLUTTER_DIR git clone https://github.com/flutter/flutter.git -b stable; \
 	  flutter precache; \
