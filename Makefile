@@ -34,6 +34,11 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install stripe/stripe-cli/stripe
 	brew install python
 
+	brew install mas
+	# Install XCode
+	# mas install 497799835
+	brew uninstall mas
+
 	brew install --cask docker
 	brew install --cask fig
 	brew install --cask figma
