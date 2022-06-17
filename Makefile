@@ -82,6 +82,6 @@ setup-dock: ## Configure MacOS dock
 	dockutil -a /Applications/Visual Studio Code.app --no-restart
 	dockutil -a /Applications/XCode.app --no-restart
 	dockutil -a /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --no-restart
-	dockutil -a /Applications/Figma.app --no-restart
+	dockutil -a /Applications/Figma.app
 
 	brew uninstall lotyp/formulae/dockutil
