@@ -28,16 +28,17 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install gh
 	brew install cocoapods
 	brew install lcov
-	brew install node
 	brew install node@16
 	brew install openjdk
-	echo 'export PATH="$$PATH:/opt/homebrew/opt/openjdk/bin"' >> ${HOME}/.zshrc; \
+	echo 'export PATH="$$PATH:/opt/homebrew/opt/openjdk/bin"' >> ${HOME}/.zshrc 
 	brew install stripe/stripe-cli/stripe
 	brew install python
+	brew install firebase-cli
 
 	brew install mas
 	# Install XCode
 	# mas install 497799835
+	# sudo xcode-select -s /Applications/XCode.app/Contents/Developer
 	brew uninstall mas
 
 	brew install --cask docker
@@ -60,6 +61,9 @@ setup-flutter: ## Install flutter
 	  $(FLUTTER) upgrade; \
 	  echo 'export PATH="$$PATH:$(FLUTTER_DIR)/flutter/bin"' >> ${HOME}/.zshrc; \
 	  echo 'export PATH="$$PATH:$(FLUTTER_DIR)/flutter/bin/cache/dart-sdk/bin"' >> ${HOME}/.zshrc;
+
+	dart pub global activate flutterfire_cli
+	dart pub global activate melos
 
 setup-communication: ## Install tools to communicate with other team members
 	brew install --cask discord
