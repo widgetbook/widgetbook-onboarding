@@ -64,6 +64,7 @@ setup-flutter: ## Install flutter
 
 	dart pub global activate flutterfire_cli
 	dart pub global activate melos
+	dart pub global activate mason_cli
 
 setup-communication: ## Install tools to communicate with other team members
 	brew install --cask discord
