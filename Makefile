@@ -16,7 +16,7 @@ setup-brew: ## Install brew
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 	# add homebrew to path
-	echo 'eval "$$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.zprofile 
+	echo 'eval "$$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.zshrc
 	eval "$$(/opt/homebrew/bin/brew shellenv)"
 
 setup-development: ## Installs dev-tools and flutter
@@ -35,10 +35,10 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install python
 	brew install firebase-cli
 
-	brew install mas
 	# Install XCode
-	# mas install 497799835
-	# sudo xcode-select -s /Applications/XCode.app/Contents/Developer
+	brew install mas
+	mas install 497799835
+	sudo xcode-select -s /Applications/XCode.app/Contents/Developer
 	brew uninstall mas
 
 	brew install --cask docker
@@ -50,18 +50,8 @@ setup-development-tools: ## Install tools to build and maintain our products
 	brew install --cask postman
 	brew install --cask visual-studio-code
 
-FLUTTER_DIR = ${HOME}/Development
-FLUTTER = $(FLUTTER_DIR)/flutter/bin/flutter
 setup-flutter: ## Install flutter
-	mkdir $(FLUTTER_DIR)
-	cd $(FLUTTER_DIR); \
-	  git clone https://github.com/flutter/flutter.git -b stable; \
-	  $(FLUTTER) precache; \
-	  $(FLUTTER) config --no-analytics; \
-	  $(FLUTTER) upgrade; \
-	  echo 'export PATH="$$PATH:$(FLUTTER_DIR)/flutter/bin"' >> ${HOME}/.zshrc; \
-	  echo 'export PATH="$$PATH:$(FLUTTER_DIR)/flutter/bin/cache/dart-sdk/bin"' >> ${HOME}/.zshrc;
-
+	brew install --cask flutter
 	dart pub global activate flutterfire_cli
 	dart pub global activate melos
 	dart pub global activate mason_cli
@@ -78,37 +68,36 @@ setup-dock: ## Configure MacOS dock
 	brew install lotyp/formulae/dockutil
 
 	echo Remove default icons from dock
-	dockutil --remove "Launchpad" --no-restart
-	dockutil --remove "Safari" --no-restart
-	dockutil --remove "Mail" --no-restart
-	dockutil --remove "FaceTime" --no-restart
-	dockutil --remove "Calendar" --no-restart
-	dockutil --remove "Contacts" --no-restart
-	dockutil --remove "Messages" --no-restart
-	dockutil --remove "Maps" --no-restart
-	dockutil --remove "Photos" --no-restart
-	dockutil --remove "Contact" --no-restart
-	dockutil --remove "Reminders" --no-restart
-	dockutil --remove "Notes" --no-restart
-	dockutil --remove "TV" --no-restart
-	dockutil --remove "Music" --no-restart
-	dockutil --remove "Podcasts" --no-restart
-	dockutil --remove "App Store" --no-restart
-	dockutil --remove "System Preferences" --no-restart
+	dockutil --remove "Launchpad"
+	dockutil --remove "Safari"
+	dockutil --remove "Mail"
+	dockutil --remove "FaceTime"
+	dockutil --remove "Calendar" 
+	dockutil --remove "Messages"
+	dockutil --remove "Maps"
+	dockutil --remove "Photos"
+	dockutil --remove "Contacts"
+	dockutil --remove "Reminders"
+	dockutil --remove "Notes"
+	dockutil --remove "TV"
+	dockutil --remove "Music"
+	dockutil --remove "Podcasts"
+	dockutil --remove "App Store"
+	dockutil --remove "System Preferences"
 
 	echo Add development tools to dock
-	dockutil -a /Applications/Google Chrome.app --no-restart
-	dockutil -a /Applications/Utilities/Activity Monitor.app --no-restart
-	dockutil -a /Applications/Utilities/Terminal.app --no-restart
-	dockutil -a /Applications/Calendar.app --no-restart
-	dockutil -a /Applications/Mail.app --no-restart
-	dockutil -a /Applications/Discord.app --no-restart
-	dockutil -a /Applications/Slack.app --no-restart
-	dockutil -a /Applications/Notion.app --no-restart
-	dockutil -a /Applications/Postman.app --no-restart
-	dockutil -a /Applications/Visual Studio Code.app --no-restart
-	dockutil -a /Applications/XCode.app --no-restart
-	dockutil -a /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --no-restart
-	dockutil -a /Applications/Figma.app
+	dockutil -a "/Applications/Google Chrome.app" --no-restart
+	dockutil -a "/Applications/Utilities/Activity Monitor.app" --no-restart
+	dockutil -a "/Applications/Utilities/Terminal.app" --no-restart
+	dockutil -a "/Applications/Calendar.app" --no-restart
+	dockutil -a "/Applications/Mail.app" --no-restart
+	dockutil -a "/Applications/Discord.app" --no-restart
+	dockutil -a "/Applications/Slack.app" --no-restart
+	dockutil -a "/Applications/Notion.app" --no-restart
+	dockutil -a "/Applications/Postman.app" --no-restart
+	dockutil -a "/Applications/Visual Studio Code.app" --no-restart
+	dockutil -a "/Applications/XCode.app" --no-restart
+	dockutil -a "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" --no-restart
+	dockutil -a "/Applications/Figma.app"
 
 	brew uninstall lotyp/formulae/dockutil
